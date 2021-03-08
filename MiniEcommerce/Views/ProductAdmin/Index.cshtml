@@ -1,0 +1,68 @@
+﻿@model IDataResult<List<ProductListViewModel>>
+
+<div class="row">
+    <div class="col-md-12">
+        <h1 class="h3">Admin Products</h1>
+        <hr>
+        <a class="btn btn-primary btn-sm" href="/admin/products/create">Add Product</a>
+        @if (TempData["Message"] != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-primary">
+                        @TempData["Message"]
+                    </div>
+                </div>
+            </div>
+        }
+        @if (TempData["Error"] != null)
+        {
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-danger">
+                        @TempData["Error"]
+                    </div>
+                </div>
+            </div>
+        }
+        <table class="table table-bordered mt-3">
+            <thead>
+                <tr>
+                    <td style="width: 30px;">Id</td>
+                    <td style="width: 100px;">Image</td>
+                    <td>Name</td>
+                    <td style="width: 20px;">Price</td>
+                    <td style="width: 150px;"></td>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Data.Count > 0)
+                {
+                    @foreach (var item in Model.Data)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td><img asp-append-version="true" src="@item.DefaultImageUrl" width="80"></td>
+                            <td>@item.Name</td>
+                            <td>@item.Price</td>
+                            <td>
+                                <a href="/admin/products/@item.Id" class="btn btn-primary btn-sm mr-2">Edit</a>
+
+                                <form action="/admin/products/delete/@item.Id" method="post" style="display: inline;">
+                                    @*<input type="hidden" name="productId" value="@item.Id">*@
+                                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning">
+                        <h3>No Products</h3>
+                    </div>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

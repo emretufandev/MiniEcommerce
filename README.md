@@ -6,7 +6,11 @@
 - add-migration ApplicationContextTables -context ApplicationContext
 - update-database
 
+### Registration
+- admin/register linkinden admin kullanıcısı oluşturabilirsiniz
+
 ### Notlar
+- Cookie süresi 5dk olarak ayarlanmıştır.
 - Business katmanındaki modellere DataAnnotations tanımlanmıştır. Best practices açısından uygun değildir. FluentValidator kullanılarak örnek bir validator yazılmıştır. Autofac ile AOP mantığına çevrilebilir.
 - Transaction sistemi kurulmamıştır. UnitOfWork eklenerek geliştirilebilir.
 - Dependency Register işlemleri business katmanında extension yazılıp UI katmanından çağrılmıştır.
